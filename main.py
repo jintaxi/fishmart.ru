@@ -37,7 +37,7 @@ except Exception as ex:
         with open ("BD.json", 'r', encoding='utf-8') as file:
             data = json.load(file)
         items.append({"name": f"{item.get('title')}",
-        "link": f"https://fishmart.ru/{item.get('href')}"})
+        "link": f"https://fishmart.ru{item.get('href')}"})
 
         if data == items:
             status = 'Ничего не поменялось'
