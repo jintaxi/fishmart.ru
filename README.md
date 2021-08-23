@@ -13,9 +13,20 @@ pip install -r requirements.txt
 ```
 
 ## Setup enviroment
-Find [bot token](https://t.me/botfather) and insert it into .zshrc (or .bashrc) at the end of the file in variable `TOKEN`
+* Find [bot token](https://t.me/botfather) and insert it into .zshrc (or .bashrc) at the end of the file in variable `TOKEN`
+
+* `vim ~/.zshrc` or `vim ~/.bashrc`
 
 It will look like `export TOKEN="1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGH"`
+
+* After this reload .zshrc
+```
+source ~/.zshrc
+``` 
+or 
+```
+source ~/.bashrc
+```
 
 ## Setup cron
 Open `crontab -e`
