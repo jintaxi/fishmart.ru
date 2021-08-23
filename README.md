@@ -15,4 +15,4 @@ pip install -r requirements.txt
 `
 crontab -e
 `
-``
+`*/10 * * * * /home/pi/code/fishmart.ru/fishmart.ru/bin/python3.9 /home/pi/code/fishmart.ru/main.py`
