@@ -19,6 +19,9 @@ soup = BeautifulSoup(req.text, "html.parser")
 # with open("site.html", "r") as file:
 #     soup = BeautifulSoup(file.read(), "lxml")
 
+with open("BD.json", 'w') as file:
+    json.dump('', file, ensure_ascii=False)
+
 
 try:
     result = soup.find('div', class_="catalog_no_items").text
@@ -60,8 +63,8 @@ if status == 'Есть изменения':
 
     answer = '\n'.join(my_string)
     print(answer)
-    for user in users:
-        try:
-            bot.send_message(user['id'], answer, parse_mode='Markdown')
-        except Exception:
-            pass
+    # for user in users:
+    #     try:
+    #         bot.send_message(user['id'], answer, parse_mode='Markdown')
+    #     except Exception:
+    #         pass
