@@ -9,7 +9,7 @@ cd fishmart.ru; \
 python3.9 -m venv fishmart.ru; \
 source fishmart.ru/bin/activate; \
 pip install -U pip; \
-pip install -r equirements.txt
+pip install -r requirements.txt
 ```
 
 ## setting up
