@@ -8,4 +8,5 @@ cd fishmart.ru; \
 python3.9 -m fishmart.ru; \
 source fishmart.ru/bin/activate; \
 pip install -U pip; \
-pip install -r equirements.txt```
+pip install -r equirements.txt
+```
