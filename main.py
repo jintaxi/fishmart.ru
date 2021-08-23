@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import json
 from os import getenv
 import telebot
+from os import path
 
 token = getenv("TOKEN")
 bot = telebot.TeleBot(token=token)
@@ -19,9 +20,9 @@ soup = BeautifulSoup(req.text, "html.parser")
 # with open("site.html", "r") as file:
 #     soup = BeautifulSoup(file.read(), "lxml")
 
-with open("BD.json", 'w') as file:
-    json.dump('', file, ensure_ascii=False)
-
+if path.isfile("BD.json") == False:
+    with open("BD.json", 'w') as file:
+        json.dump('', file, ensure_ascii=False)
 
 try:
     result = soup.find('div', class_="catalog_no_items").text
