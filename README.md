@@ -1,7 +1,8 @@
 # fishmart.ru
 
 ## setting up
-```mkdir code; \
+```
+mkdir code; \
 cd code; \
 git clone https://github.com/jintaxi/fishmart.ru.git; \
 cd fishmart.ru; \
