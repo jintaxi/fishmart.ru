@@ -63,8 +63,8 @@ if status == 'Есть изменения':
 
     answer = '\n'.join(my_string)
     print(answer)
-    # for user in users:
-    #     try:
-    #         bot.send_message(user['id'], answer, parse_mode='Markdown')
-    #     except Exception:
-    #         pass
+    for user in users:
+        try:
+            bot.send_message(user['id'], answer, parse_mode='Markdown')
+        except Exception:
+            pass
