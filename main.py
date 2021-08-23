@@ -13,7 +13,7 @@ bot = telebot.TeleBot(token=token)
 url = "https://fishmart.ru/catalog/okhlazhdennaya_ryba/"
 headers = {"User-Agent": UserAgent().chrome}
 req = requests.get(url=url, headers=headers)
-soup = BeautifulSoup(req.text, "lxml")
+soup = BeautifulSoup(req.text, "html.parser")
 
 """Тестовый файл"""
 # with open("site.html", "r") as file:
