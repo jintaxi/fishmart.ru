@@ -34,10 +34,10 @@ try:
         data = file.read()
     
     # Отладочня информация
-    print("-"*40)
-    print(f"[INFO] data  : {data}")
-    print(f"[INFO] result: {result}")
-    print("-"*40)
+    # print("-"*40)
+    # print(f"[INFO] data  : {data}")
+    # print(f"[INFO] result: {result}")
+    # print("-"*40)
 
     if data == result:
         print(f"[INFO] Данные *не* поменялсиь. Файл *не* перезаписан")
@@ -73,11 +73,11 @@ except Exception as _:
     with open("/var/tmp/result.txt", 'r') as file:
         data = file.read()
     
-   # Отладочня информация
-    print("-"*40)
-    print(f"[INFO] data  : {data}")
-    print(f"[INFO] result: {positions}")
-    print("-"*40)
+    # Отладочня информация
+    # print("-"*40)
+    # print(f"[INFO] data  : {data}")
+    # print(f"[INFO] result: {positions}")
+    # print("-"*40)
 
     result = '\n'.join(positions)
 
