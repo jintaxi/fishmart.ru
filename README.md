@@ -34,5 +34,5 @@ Open `crontab -e`
 
 Then paste this at the end of the file
 ```
-*/10 * * * * /home/pi/code/fishmart.ru/fishmart.ru/bin/python /home/pi/code/fishmart.ru/main.py
+*/30 * * * * /home/pi/code/fishmart.ru/fishmart.ru/bin/python /home/pi/code/fishmart.ru/main.py
 ```
