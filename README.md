@@ -4,6 +4,7 @@
 ```
 mkdir code; \
 cd code; \
+touch /var/tmp/result.txt; \
 git clone https://github.com/jintaxi/fishmart.ru.git ; \
 cd fishmart.ru; \
 python3.9 -m venv fishmart.ru; \
@@ -13,7 +14,7 @@ pip install -r requirements.txt
 ```
 
 ## Setup enviroment
-* Find [bot token](https://t.me/botfather) and insert it into .zshrc (or .bashrc) at the end of the file in variable `TOKEN`
+* Find [bot token](https://t.me/botfather) and insert it into .zshrc (or .bashrc) at the end of the file in variable `TOKEN_SECRET`
 
 * `vim ~/.zshrc` or `vim ~/.bashrc`
 
