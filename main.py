@@ -1,71 +1,87 @@
-import requests
+from requests import get
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
-import json
 from os import getenv
-import telebot
+from telebot import TeleBot
 from os import path
 
-token = getenv("TOKEN")
-bot = telebot.TeleBot(token=token)
+
+token = getenv("TOKEN_SECRET")
+bot = TeleBot(token=token)
 
 
-"""Реальный сайт"""
+"""Получаем реальную страницу сайта"""
 url = "https://fishmart.ru/catalog/okhlazhdennaya_ryba/"
 headers = {"User-Agent": UserAgent().chrome}
-req = requests.get(url=url, headers=headers)
+req = get(url=url, headers=headers)
 soup = BeautifulSoup(req.text, "html.parser")
 
-"""Тестовый файл"""
+"""Отладочная страница"""
 # with open("site.html", "r") as file:
 #     soup = BeautifulSoup(file.read(), "lxml")
 
-if path.isfile("BD.json") == False:
-    with open("BD.json", 'w') as file:
-        json.dump('', file, ensure_ascii=False)
 
 try:
+    """
+    Если на странице ничего нет
+    """
+
+    # Данные со страницы
     result = soup.find('div', class_="catalog_no_items").text
-    print(result)
-    with open("BD.json", 'w', encoding='utf-8') as file:
-        json.dump(result, file, ensure_ascii=False)
-except Exception as ex:
+
+    # Данные последнего состояния
+    with open("/var/tmp/result.txt", 'r') as file:
+        data = file.read()
+    
+    # Отладочня информация
+    print("-"*40)
+    print(f"[INFO] data  : {data}")
+    print(f"[INFO] result: {result}")
+    print("-"*40)
+
+    if data == result:
+        print(f"[INFO] Данные *не* поменялсиь. Файл *не* перезаписан")
+    else:
+        with open("/var/tmp/result.txt", 'w') as file:
+            file.write(result)
+        print(f"[INFO] Данные поменялись. Файл перезаписан")
+        # ----- Отправка сообщения, что не осталось больше товара -----
+        bot.send_message(443264815, f'Товар закончился', parse_mode='Markdown')
+
+except Exception as _:
+    """
+    Если на странице что-то есть
+    """
+    print(f"[INFO] На сайте что-то есть")
+
+    # Поиск необхомых элементов
     main_page = soup.find_all('div', id="main_block_page")
-    items = []
-
+    positions = []
     for item in main_page:
-        item = item.find('div', class_="bx_catalog_section_box").find('div', class_="img_box").find('a', class_="image main_preview_image offers_hide")
-        with open ("BD.json", 'r', encoding='utf-8') as file:
-            data = json.load(file)
-        items.append({"name": f"{item.get('title')}",
-        "link": f"https://fishmart.ru{item.get('href')}"})
+        title = item.find('div', class_="bx_catalog_section_box").find('div', class_="img_box").find('a', class_="image main_preview_image offers_hide").get('title')
+        link = "https://fishmart.ru" + item.find('div', class_="bx_catalog_section_box").find('div', class_="img_box").find('a', class_="image main_preview_image offers_hide").get('href')
+        position = f"[{title}]({link})"
+        positions.append(position)
 
-        if data == items:
-            status = 'Ничего не поменялось'
+    # Данные последнего состояния
+    with open("/var/tmp/result.txt", 'r') as file:
+        data = file.read()
+    
+   # Отладочня информация
+    print("-"*40)
+    print(f"[INFO] data  : {data}")
+    print(f"[INFO] result: {positions}")
+    print("-"*40)
 
-        else:
-            with open("BD.json", 'w', encoding='utf-8') as file:
-                json.dump(items, file, ensure_ascii=False)
-            status = 'Есть изменения'
+    result = '\n'.join(positions)
 
-finally:
-    pass
+    if data == result:
+        print(f"[INFO] Данные *не* поменялсиь. Файл *не* перезаписан")
+    else:
+        with open("/var/tmp/result.txt", 'w') as file:
+            file.write(result)
+        print(f"[INFO] Данные поменялись. Файл перезаписан")
+        bot.send_message(443264815, f'{result}', parse_mode='Markdown')
 
-if status == 'Есть изменения':
-    with open('users.json', 'r') as file:
-        users = json.load(file)
-
-    with open('BD.json', 'r') as file:
-        data = json.load(file)
-
-    my_string = []
-    for item in data:
-        my_string.append(f"[{item['name']}]({item['link']})")
-
-    answer = '\n'.join(my_string)
-    print(answer)
-    for user in users:
-        try:
-            bot.send_message(user['id'], answer, parse_mode='Markdown')
-        except Exception:
-            pass
+        
+    
