@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 * `vim ~/.zshrc` or `vim ~/.bashrc`
 
-It will look like `export TOKEN="1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGH"`
+It will look like `export TOKEN_SECRET="1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGH"`
 
 * After this reload .zshrc
 ```
@@ -34,5 +34,5 @@ Open `crontab -e`
 
 Then paste this at the end of the file
 ```
-*/10 * * * * /home/pi/code/fishmart.ru/fishmart.ru/bin/python3.9 /home/pi/code/fishmart.ru/main.py
+*/10 * * * * /home/pi/code/fishmart.ru/fishmart.ru/bin/python /home/pi/code/fishmart.ru/main.py
 ```
