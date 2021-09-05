@@ -40,25 +40,26 @@ try:
     # print("-"*40)
 
     if data == result:
-        print(f"[INFO] Данные *не* поменялсиь. Файл *не* перезаписан")
+        # print(f"[INFO] Данные *не* поменялсиь. Файл *не* перезаписан")
+        pass
+
     else:
         with open("/var/tmp/result.txt", 'w') as file:
             file.write(result)
-        print(f"[INFO] Данные поменялись. Файл перезаписан")
+        # print(f"[INFO] Данные поменялись. Файл перезаписан")
         
         # Рассылка
         for user in users:
             try:
                 bot.send_message(user, "Товар закончился", parse_mode='Markdown')
-                pass
-            except Exception:
+            except Exception as _:
                 pass
 
 except Exception as _:
     """
     Если на странице что-то есть
     """
-    print(f"[INFO] На сайте что-то есть")
+    # print(f"[INFO] На сайте что-то есть")
 
     # Поиск необхомых элементов
     main_page = soup.find_all('div', id="main_block_page")
@@ -82,16 +83,17 @@ except Exception as _:
     result = '\n'.join(positions)
 
     if data == result:
-        print(f"[INFO] Данные *не* поменялсиь. Файл *не* перезаписан")
+        # print(f"[INFO] Данные *не* поменялсиь. Файл *не* перезаписан")
+        pass
+    
     else:
         with open("/var/tmp/result.txt", 'w') as file:
             file.write(result)
-        print(f"[INFO] Данные поменялись. Файл перезаписан")
+        # print(f"[INFO] Данные поменялись. Файл перезаписан")
 
         # Рассылка
         for user in users:
             try:
                 bot.send_message(user, f'{result}', parse_mode='Markdown')
-                pass
-            except Exception:
+            except Exception as _:
                 pass
