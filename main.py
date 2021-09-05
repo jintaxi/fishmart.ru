@@ -3,22 +3,22 @@ from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from os import getenv
 from telebot import TeleBot
-from os import path
 
 
+# Создаем бота
 token = getenv("TOKEN_SECRET")
 bot = TeleBot(token=token)
 
 
-"""Получаем реальную страницу сайта"""
+# Обращение к странице сайта
 url = "https://fishmart.ru/catalog/okhlazhdennaya_ryba/"
 headers = {"User-Agent": UserAgent().chrome}
 req = get(url=url, headers=headers)
 soup = BeautifulSoup(req.text, "html.parser")
 
-"""Отладочная страница"""
-# with open("site.html", "r") as file:
-#     soup = BeautifulSoup(file.read(), "lxml")
+
+# Пользователи для рассылки
+users = [443264815, 91114315, 167937533]
 
 
 try:
@@ -45,8 +45,14 @@ try:
         with open("/var/tmp/result.txt", 'w') as file:
             file.write(result)
         print(f"[INFO] Данные поменялись. Файл перезаписан")
-        # ----- Отправка сообщения, что не осталось больше товара -----
-        bot.send_message(443264815, f'Товар закончился', parse_mode='Markdown')
+        
+        # Рассылка
+        for user in users:
+            try:
+                bot.send_message(user, "Товар закончился", parse_mode='Markdown')
+                pass
+            except Exception:
+                pass
 
 except Exception as _:
     """
@@ -81,7 +87,11 @@ except Exception as _:
         with open("/var/tmp/result.txt", 'w') as file:
             file.write(result)
         print(f"[INFO] Данные поменялись. Файл перезаписан")
-        bot.send_message(443264815, f'{result}', parse_mode='Markdown')
 
-        
-    
+        # Рассылка
+        for user in users:
+            try:
+                bot.send_message(user, f'{result}', parse_mode='Markdown')
+                pass
+            except Exception:
+                pass
