@@ -14,11 +14,11 @@ pip install -r requirements.txt
 ```
 
 ## Setup enviroment
-* Find [bot token](https://t.me/botfather) and insert it into .zshrc (or .bashrc) at the end of the file in variable `TOKEN_SECRET`
+* Find password for new email and insert it into .zshrc (or .bashrc) at the end of the file in variable `EMAIL_PASSWD`
 
 * `vim ~/.zshrc` or `vim ~/.bashrc`
 
-It will look like `export TOKEN_SECRET="1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGH"`
+It will look like `export EMAIL_PASSWD="1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGH"`
 
 * After this reload .zshrc
 ```
