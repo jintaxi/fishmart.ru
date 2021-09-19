@@ -15,7 +15,7 @@ server.starttls()
 
 
 # Отправка сообщения
-def send_mail(mail):
+def send_mail(mail:str):
 
     # Генерация сообщения
     mail = MIMEText(f"{mail}")
