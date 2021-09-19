@@ -12,7 +12,7 @@ req = get(url=url, headers=headers)
 soup = BeautifulSoup(req.text, "html.parser")
 
 
-# Начало парсинга
+"""Начало парсинга"""
 try:
     """Если на странице ничего нет"""
 
