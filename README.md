@@ -21,13 +21,7 @@ pip install -r requirements.txt
 It will look like `export EMAIL_PASSWD="1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGH"`
 
 * After this reload .zshrc
-```
-source ~/.zshrc
-``` 
-or 
-```
-source ~/.bashrc
-```
+```source ~/.zshrc``` or ```source ~/.bashrc```
 
 ## Setup cron
 Open `crontab -e`
